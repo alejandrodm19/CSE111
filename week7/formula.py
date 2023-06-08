@@ -19,42 +19,6 @@ def parse_formula(formula, periodic_table_dict):
     Return: a compound list that contains chemical symbols and
         quantities like this [["Fe", 2], ["O", 3]]
     """
-    
-    compound_list = []
-    element = ""
-    count = ""
-    stack = []
-
-    for char in formula:
-        if char.isupper():
-            if element != "":
-                if count == "":
-                    count = "1"
-                compound_list.append([element, int(count)])
-                element = ""
-                count = ""
-            element += char
-        elif char.islower():
-            element += char
-        elif char.isdigit():
-            count += char
-        elif char == "(":
-            stack.append([element, count])
-            element = ""
-            count = ""
-        elif char == ")":
-            sub_formula = parse_formula(element, periodic_table_dict)
-            sub_count = int(count) if count != "" else 1
-            for sub_element, sub_element_count in sub_formula:
-                compound_list.append([sub_element, sub_element_count * sub_count])
-            element, count = stack.pop()
-
-    if element != "":
-        if count == "":
-            count = "1"
-        compound_list.append([element, int(count)])
-
-    return compound_list
     assert isinstance(formula, str), \
         "wrong data type for parameter formula; " \
         f"formula is a {type(formula)} but must be a string"
