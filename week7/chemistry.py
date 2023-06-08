@@ -98,10 +98,6 @@ def make_periodic_table():
         ['Zn', 'Zinc', 65.38],
         ['Zr', 'Zirconium', 91.224],
     ]
-    return periodic_table_list
-
-def make_periodic_table_dict():
-    periodic_table_list = make_periodic_table()
     periodic_table_dict = {}
     for element in periodic_table_list:
         periodic_table_dict[element[0]] = {'name': element[NAME_INDEX], 'atomic_mass': element[ATOMIC_MASS_INDEX]}
@@ -154,7 +150,7 @@ def compute_molar_mass(symbol_quantity_list, periodic_table_dict):
 def main():
     formula = input("Enter the chemical formula of a molecule: ")
     mass = float(input("Enter the mass of the chemical sample in grams: "))
-    periodic_table = make_periodic_table_dict()
+    periodic_table = make_periodic_table()
    
     symbol_quantity_list = parse_formula(formula, periodic_table)
     molar_mass = compute_molar_mass(symbol_quantity_list, periodic_table)
